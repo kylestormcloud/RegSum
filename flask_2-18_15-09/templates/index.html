@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie-edge">
+        <title>RegSum - Home</title>
+    </head>
+    <body>
+        
+        <h1>Please choose a page to summarize.</h1>
+        
+        {% block form %}
+        <form method="POST" action="/summary">
+            <input type="text" name="page number" placeholder="###">
+        </form>
+        {% endblock %}
+        
+        <section>
+            {% block summary %}
+            {% endblock %}
+        </section>
+        
+        <section>
+            {% block text %}
+            {% endblock %}
+        </section>
+        
+    </body>
+</html> 
