@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie-edge">
+        {% block title %}
+        <title>RegSum - Home</title>
+        {% endblock %}
+        <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    </head>
+    <body>
+
+        <h1>CFR Summaries</h1>
+        {% block form %}
+        <div class="summary">        
+            <h4>Please choose a page to summarize.</h4>                
+            <form method="POST" action="/summary">
+                <input type="text" name="page number" placeholder="###">
+                <input id="button" type="submit" value="Generate Summary" >
+            </form>
+        </div>
+        {% endblock %}
+        
+        <div class="summary">
+                {% block summary %}
+                {% endblock %}
+        </div>
+        
+    </body>
+</html> 
