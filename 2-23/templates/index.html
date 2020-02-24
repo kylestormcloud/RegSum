@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie-edge">
+        {% block title %}
+        <title>RegSum - Home</title>
+        {% endblock %}
+        <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    </head>
+    <body>
+        
+        {% block heading %}
+        <h1>CFR Summaries</h1>
+        {% endblock %}
+        
+        {% block form %}
+        <form method="POST" action="/summary">
+            <label for="sections">Please choose a section:</label>
+            <select id="sections" name="sectno">
+                <option value=101>101</option>
+                <option value=102>102</option>
+                <option value=105>105</option>
+                <option value=106>106</option>
+                <option value=107>107</option>
+                <option value=108>108</option>
+                <option value=109>109</option>
+                <option value=112>112</option>
+                <option value=113>113</option>
+                <option value=114>114</option>
+                <option value=115>115</option>
+                <option value=117>117</option>
+                <option value=119>119</option>
+                <option value=120>120</option>
+                <option value=121>121</option>
+                <option value=123>123</option>
+                <option value=124>124</option>
+                <option value=125>125</option>
+                <option value=126>126</option>
+                <option value=127>127</option>
+                <option value=130>130</option>
+                <option value=134>134</option>
+                <option value=136>136</option>
+                <option value=140>140</option>
+                <option value=142>142</option>
+                <option value=146>146</option>
+                <option value=147>147</option>
+                <option value=300>300</option>
+                <option value=301>301</option>
+                <option value=302>302</option>
+                <option value=303>303</option>
+                <option value=304>304</option>
+                <option value=305>305</option>
+                <option value=306>306</option>
+                <option value=307>307</option>
+                <option value=308>308</option>
+                <option value=309>309</option>
+                <option value=310>310</option>
+                <option value=312>312</option>
+                <option value=314>314</option>
+                <option value=315>315</option>
+                <option value=400>400</option>
+                <option value=500>500</option>
+            </select>
+            <input id="button" type="submit" value="Generate Summary" >
+        </form>
+        {% endblock %}
+        
+        <div class="summary">
+                {% block summary %}
+                {% endblock %}
+        </div>
+        
+    </body>
+</html> 

@@ -1,0 +1,28 @@
+.summary {
+    margin-left: 30px;
+    margin-right: 15%;
+}
+
+#button {
+    color: rgb(10, 54, 151);
+}
+
+body {
+    background: #45FFF1;
+    background: -moz-linear-gradient(-45deg, #45FFF1 0%, #0C46C5 100%);
+    background: -webkit-linear-gradient(-45deg, #45FFF1 0%, #0C46C5 100%);
+    background: linear-gradient(135deg, #45FFF1 0%, #0C46C5 100%);
+}
+
+h1,h4 {
+    margin-left: 30px;
+    color: rgb(10, 54, 151)
+}
+
+.result {
+    background-color: white;
+    border: 5px #0B45C4 solid;
+    border-radius: 20px;
+    margin-bottom: 1cm;
+    padding: 1cm
+}

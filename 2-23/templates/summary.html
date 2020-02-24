@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+
+{% block title %}
+<title>RegSum - Summary</title>
+{% endblock %}
+
+{% block heading %}
+<h1>Section {{number}}</h1>
+{% endblock %}
+
+{% block form %}
+{% endblock %}
+
+{% block summary %}
+<div id="summary" class="result">
+    <h2>Summary</h2>
+    <p><em>{{summary}}</em></p>
+</div>
+
+<div id="text" class="result">
+    <h3>Original Text</h3>
+    <p>{{text}}</p>
+</div>
+{% endblock %}
