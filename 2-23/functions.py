@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Kyle Cloud
-February 22, 2020
-
-Clean XML Files
-
-The purpose is to remove the <E> elements
-from inside the <P> elements of the XML file
+Last Update: February 24, 2020
 """
 
 # Import regular expressions
@@ -21,7 +16,7 @@ from gensim.summarization import summarize, keywords
 # Import ElementTree
 import xml.etree.ElementTree as ET
 
-# Define the function
+# Preprocessing: removing unwanted elements from the original XML
 def clean_xml(old_file, new_file):
     
     # Tell the user what's happening
@@ -58,6 +53,8 @@ def clean_xml(old_file, new_file):
     
 #####################################################################
 
+# Preprocessing: clean up the text by removing indexing,
+# citations, and newlines.
 def preprocess(text):
     
     # Remove all indexing
@@ -83,7 +80,7 @@ def get_summary(text):
     sent_count = len(sentences)
         
     # compute the summary to text ratio
-    ratio = 2 / sent_count
+    ratio = 2 / sent_count # looking for one or two sentences per section
 
     # call the summarize function
     summary = summarize(prepro, ratio)
@@ -144,10 +141,12 @@ class Section():
         Check if a word input by the user
         matches the keyword of the section.
         
-        Not case-sensitive.
+        Not case-sensitive since both the user
+        input and keyword attribute are converted
+        to lowercase for the comparison
         '''
         
-        return keyword.lower() == self.keyword
+        return keyword.lower() == self.keyword.lower()
         
     def number_match(self, number):
         
@@ -164,38 +163,48 @@ class Volume():
     
     '''
     A Volume object contains a collection of Section objects.
+    
+    It offers functionality to search for a section by
+    number or keyword.
+    
+    The constructor accepts the name of the XML file
+    from which the Volume object will be created
     '''
 
     def __init__(self, filename):
         
+        # Create an ElementTree for the XML file
         tree = ET.parse(filename)
+        
+        # Get the root node
         root = tree.getroot()
 
+        # Create an iterator to iterate through the elements
         CFR_iter = root.iter()
-        doc_dict = {}
+        doc_dict = {} # dictionary to hold sections and respective text
 
         for element in CFR_iter:
             if element.tag == 'SECTION':
-                section = element.find('SECTNO').text
-                number = re.sub(r'[^0-9\-\.]', '', section) # Process that number
-                number = re.sub(r'\..*$', '', number)
-                number = int(number)
+                section = element.find('SECTNO').text # Get the section number
+                number = re.sub(r'[^0-9\-\.]', '', section) # Trim the number
+                number = re.sub(r'\..*$', '', number) # Ignore subsection numbers
+                number = int(number) # convert to integer
                 if number not in doc_dict.keys(): # new section = new key
-                    doc_dict[number] = []
+                    doc_dict[number] = [] # new section: start with an empty list
                 for child in element.getchildren():
                     if child.tag == 'P': # get all the paragraphs
                         text = re.sub(r'^\(.*[0-9].*\)', '', child.text)
-                        doc_dict[number].append(text) # all them to the list
+                        doc_dict[number].append(text) # append text to the list
         
-        sections = []
+        sections = [] # Initialize a list to hold the Section objects
         
-        for key in doc_dict.keys():
-            number = key
-            text = ' '.join(doc_dict[key])
-            section = Section(number, text)
-            sections.append(section)
+        for key in doc_dict.keys(): # Iterate through the dictionary
+            number = key # The keys are the numbers of each section
+            text = ' '.join(doc_dict[key]) # The texts are the values, join lists into strings
+            section = Section(number, text) # Instantiate an object for each section, and...
+            sections.append(section) # append it to the Volume sections list
         
-        self.sections = sections
+        self.sections = sections # That list becomes the attribute of the Volume object.
         
     def search_by_number(self, number):
         
@@ -207,11 +216,17 @@ class Volume():
     
     def search_by_keyword(self, keyword):
         
-        for section in self.sections:
-            if section.keyword == keyword:
-                return (True, section)
+        '''
+        Accepts a keyword and returns a list of sections whose keyword matches the input.
+        '''
+        
+        match_list = [] # Initialize the list of matches
+        
+        for section in self.sections: # Iterate through the sections.
+            if section.keyword == keyword: # If there is a match,...
+                match_list.append(section) # ...append that section to the list.
             
-        return (False, None)
+        return match_list
     
     
     
