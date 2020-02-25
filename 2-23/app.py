@@ -25,4 +25,4 @@ def summary():
     
     return render_template("summary.html", number=str(number), text=text, summary=summary)
 
-app.run(debug=True)
+app.run(debug=False)
