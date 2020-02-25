@@ -1,3 +1,9 @@
+'''
+Kyle Cloud
+RegSum Flask Application
+Last update: February 25, 2020
+'''
+
 # Import the required tools from flask
 from flask import Flask, render_template, request
 
