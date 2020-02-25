@@ -1,7 +1,62 @@
 # -*- coding: utf-8 -*-
 """
 Kyle Cloud
-Last Update: February 24, 2020
+Last Update: February 25, 2020
+
+Notes:
+
+This project uses the tools in Gensim, a Python library for topic modeling,
+to summmarize sections of the Code of Federal Regulations.
+
+Below I have attempted to give a concise overview of how summarization
+with Gensim works. The points herein discussed come from Rare Technologies,
+the creators of Gensim.
+    
+Gensim's summarization module:
+
+from: https://rare-technologies.com/text-summarization-in-python-extractive-vs-abstractive-techniques-revisited/ 
+
+   - unsupervised algorithm
+   - based on weighted-graphs
+   - built on PageRank
+       - used by Google to rank webpages
+   - uses Okapi BM25 function
+   
+TextRank:
+
+from: https://rare-technologies.com/text-summarization-in-python-extractive-vs-abstractive-techniques-revisited/
+
+    1. Pre-process the text:
+        A. Remove stop words
+        B. Stem remaining words
+    2. Create a weighted graph
+        - vertices are sentences
+    3. All sentences connected to all others by edges
+        - an edge's weight denotes the simialarity
+          between the two sentences it connects
+    4. Run PageRank algorithm
+    5. Pick the sentences with the highest score.
+      
+PageRank:
+
+from: https://en.wikipedia.org/wiki/PageRank
+    
+    - based on the webgraph
+        - pages are nodes
+        - hyperlinks are edges
+    - counts number and quality of links to a page
+    - outputs probability distribution random clicks will land you on a page
+    
+Okapi BM25:
+ 
+from: https://en.wikipedia.org/wiki/Okapi_BM25
+ 
+    - bag-of-words retrieval function
+    - TF-IDF-like
+    
+Bag of Words:
+    - Input = context
+    - Predict: word
 """
 
 # Import regular expressions
@@ -84,7 +139,7 @@ def get_summary(text):
 
     # call the summarize function
     summary = summarize(prepro, ratio)
-    
+        
     return summary
 
 #####################################################################
