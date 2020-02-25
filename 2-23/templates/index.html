@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    <!-- Last Updated: February 25, 2020 -->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,8 @@
         {% block form %}
         <form method="POST" action="/summary">
             <label for="sections">Please choose a section:</label>
+            <!-- A dropdown menu prevents the user from entering an invalid input
+                 since only the sections in Title 13 Volume 1 are displayed. -->
             <select id="sections" name="sectno">
                 <option value=101>101</option>
                 <option value=102>102</option>
