@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Last Updated: February 25, 2020 -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie-edge">
+        {% block title %}
+        <title>RegSum - Home</title>
+        {% endblock %}
+        <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    </head>
+    <body>
+        
+        {% block heading %}
+        <h1>CFR Summaries</h1>
+        {% endblock %}
+        
+        {% block form %}
+        <form method="POST" action="/summary">
+            <label for="sections">Please choose a section:</label>
+            <!-- A dropdown menu prevents the user from entering an invalid input
+                 since only the sections in Title 13 Volume 1 are displayed. -->
+            <select id="sections" name="sectno">
+                {% for number in numbers %}
+                <option value={{number}}>{{number}}</option>
+                {% endfor %}
+            </select>
+            <input id="button" type="submit" value="Generate Summary" >
+        </form>
+        {% endblock %}
+        
+        <div class="summary">
+                {% block summary %}
+                {% endblock %}
+        </div>
+        
+    </body>
+</html> 

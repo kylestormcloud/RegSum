@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% block title %}
+<!-- Last Update: February 25, 2020 -->
+<title>RegSum - Summary</title>
+{% endblock %}
+
+{% block heading %}
+<!-- The heading of the summary page will have the section number,
+passed from the user input on the home page. -->
+<h1>Section {{number}}</h1>
+{% endblock %}
+
+{% block form %}
+<!-- On the summary page, the user will no longer see the form.
+I might consider changing this in a future version, allowing
+the user to select another section straight from the summary page,
+rather than backtrack to the home page before making another selection.
+-->
+{% endblock %}
+
+{% block summary %}
+<!-- First print the summary -->
+<div id="summary" class="result">
+    <h2>Summary</h2>
+    <p><em>{{summary}}</em></p>
+</div>
+
+<!-- Then print the original text
+below the summary, for reference. -->
+<div id="text" class="result">
+    <h3>Original Text</h3>
+    <p>{{text}}</p>
+</div>
+{% endblock %}
